@@ -1,6 +1,8 @@
+using AspireDiagnostics.AppHost;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.AspireDiagnostics_ApiService>("apiservice")
+builder.AddProjectWithDiagnostics<Projects.AspireDiagnostics_ApiService>("apiservice")
     .WithHttpHealthCheck("/health");
 
 builder.Build().Run();
