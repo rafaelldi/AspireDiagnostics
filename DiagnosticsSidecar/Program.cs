@@ -7,6 +7,7 @@ builder.Services.AddHostedService<ConnectorService>();
 
 var app = builder.Build();
 
-app.MapPost("/dump", () => { });
+app.MapPost("/dump",
+    (DiagnosticsClientService service, CancellationToken ct) => service.CollectMemoryDumpAsync(ct));
 
 app.Run();

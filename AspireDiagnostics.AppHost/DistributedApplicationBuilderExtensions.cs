@@ -11,6 +11,7 @@ internal static class DistributedApplicationBuilderExtensions
 
         var sidecar = builder
             .AddProject<Projects.DiagnosticsSidecar>($"{name}-sidecar")
+            .WithHttpCommand("/dump", "Collect Memory Dump")
             .WithEnvironment("MY_DIAGNOSTICS_PORT", diagnosticsPortPath);
 
         return builder
