@@ -14,9 +14,13 @@ internal static class DistributedApplicationBuilderExtensions
             .WithHttpCommand("/dump", "Collect Memory Dump")
             .WithEnvironment("MY_DIAGNOSTICS_PORT", diagnosticsPortPath);
 
-        return builder
+        var project=  builder
             .AddProject<TProject>(name)
             .WithEnvironment("DOTNET_DiagnosticPorts", $"{diagnosticsPortPath},nosuspend")
             .WaitFor(sidecar);
+        
+        sidecar.WithParentRelationship(project);
+        
+        return project;
     }
 }
