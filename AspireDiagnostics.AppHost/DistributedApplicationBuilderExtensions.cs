@@ -6,10 +6,16 @@ internal static class DistributedApplicationBuilderExtensions
         this IDistributedApplicationBuilder builder, [ResourceName] string name)
         where TProject : IProjectMetadata, new()
     {
-        builder
-            .AddProject<Projects.DiagnosticsSidecar>($"{name}-sidecar");
+        var dateTimeString = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        var diagnosticsPortPath = Path.Combine(Path.GetTempPath(), $"{dateTimeString}.sock");
+
+        var sidecar = builder
+            .AddProject<Projects.DiagnosticsSidecar>($"{name}-sidecar")
+            .WithEnvironment("MY_DIAGNOSTICS_PORT", diagnosticsPortPath);
 
         return builder
-            .AddProject<TProject>(name, _ => { });
+            .AddProject<TProject>(name)
+            .WithEnvironment("DOTNET_DiagnosticPorts", $"{diagnosticsPortPath},nosuspend")
+            .WaitFor(sidecar);
     }
 }
