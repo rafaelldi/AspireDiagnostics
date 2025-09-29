@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="AspireDiagnostics.ApiService\AspireDiagnostics.ApiService.csproj" Type="Classic C#" />
+  <Project Path="AspireDiagnostics.AppHost\AspireDiagnostics.AppHost.csproj" Type="Classic C#" />
+  <Project Path="AspireDiagnostics.ServiceDefaults\AspireDiagnostics.ServiceDefaults.csproj" Type="Classic C#" />
+</Solution>
