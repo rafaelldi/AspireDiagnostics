@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\AspireDiagnostics.ApiService\AspireDiagnostics.ApiService.csproj"/>
+        <ProjectReference Include="..\DiagnosticsSidecar\DiagnosticsSidecar.csproj" />
     </ItemGroup>
 
     <ItemGroup>

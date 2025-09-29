@@ -6,6 +6,10 @@ internal static class DistributedApplicationBuilderExtensions
         this IDistributedApplicationBuilder builder, [ResourceName] string name)
         where TProject : IProjectMetadata, new()
     {
-        return builder.AddProject<TProject>(name, _ => { });
+        builder
+            .AddProject<Projects.DiagnosticsSidecar>($"{name}-sidecar");
+
+        return builder
+            .AddProject<TProject>(name, _ => { });
     }
 }
